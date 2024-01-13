@@ -12,16 +12,16 @@ const resolvers: Resolvers = {
       const user = new UserModel(args)
       return await user.save()
     },
-    // updateUser: async (_, args): Promise<User | null> => {
-    //   const user = await UserModel.findByIdAndUpdate(args.id, args, {
-    //     new: true,
-    //   })
-    //   return user
-    // },
-    // deleteUser: async (_, args): Promise<User | null> => {
-    //   const user = await UserModel.findByIdAndDelete(args.id)
-    //   return user
-    // },
+    updateUser: async (_, args): Promise<User | null> => {
+      const user = await UserModel.findByIdAndUpdate(args.uid, args, {
+        new: true,
+      })
+      return user
+    },
+    deleteUser: async (_, args): Promise<User | null> => {
+      const user = await UserModel.findOneAndDelete({ uid: args.uid })
+      return user
+    },
   },
 }
 export default resolvers
